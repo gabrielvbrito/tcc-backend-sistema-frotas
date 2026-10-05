@@ -15,7 +15,8 @@ router.post('/login', async (req, res) => {
 });
 
 router.get('/me', authenticate, async (req, res) => {
-  const profile = await getProfile((req as any).user.id);
+  const { user, token } = req as any;
+  const profile = await getProfile(user.id, token);
   res.json(profile);
 });
 
